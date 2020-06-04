@@ -27,4 +27,5 @@ ptir.view24BitPalette()
   - `is8Bit` : If True the image will be rendered in 8-bit colour, if False the image will be rendered in 24-bit colour. Not all terminal windows support 24-bit colour (Visit [this website](https://gist.github.com/XVilka/8346728) for more information)
 
 ### Dependencies
-- `opencv-python`
+- `pillow`
+- `numpy`

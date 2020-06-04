@@ -1,11 +1,12 @@
-import cv2
+from PIL import Image
+import numpy as np
 import os
 
 def _print_error(e):
 	print (u'\u001b[31mERROR: \u001b[33m' + str(e) + u'\u001b[0m')
 
-def _write_pixel(bgr, is8Bit=False):
-	b, g, r = list(map(lambda x: str(x), bgr))
+def _write_pixel(rgb, is8Bit=False):
+	r, g, b = list(map(lambda x: str(x), rgb))
 	
 	if (is8Bit):
 		to8Bit = lambda x: int(int(x) // 42.51)
@@ -20,17 +21,17 @@ def render(image_path, width=100, height=100, interp_method='bilinear', is8Bit=F
 		_print_error('WIDTH and HEIGHT parameters must be positive integers')
 		return
 
-	pic = cv2.imread(image_path)
+	pic = Image.open(image_path)
 	
 	if (pic is None):
 		_print_error(f'Could not find image at location {image_path}')
 		return
 	
-	pic = cv2.resize(pic, dsize=(width, height), interpolation=(cv2.INTER_NEAREST if interp_method == 'nearest_neighbour' else cv2.INTER_LINEAR))
+	pic = np.array(pic.resize((width, height), resample=(Image.NEAREST if interp_method == 'nearest_neighbour' else Image.BILINEAR)))
 
 	for row in range(pic.shape[0]):
 		for col in range(pic.shape[1]):
-			_write_pixel(pic[row][col], is8Bit)
+			_write_pixel(pic[row][col][:3], is8Bit)
 		print (u'\u001b[0m')
 
 def view8BitPalette():

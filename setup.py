@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 	name="ptir",
-	version="1.0.2",
+	version="1.1.1",
 	author="Joshua Bragg",
 	author_email="joshua.bragg@outlook.com",
 	description="Python Terminal Image Renderer",
@@ -15,7 +15,8 @@ setuptools.setup(
 	packages=setuptools.find_packages(),
 	license='MIT',
 	install_requires=[
-		'opencv-python'
+		'numpy',
+		'Pillow'
 	],
 	classifiers=[
 		"Programming Language :: Python :: 3",
