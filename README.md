@@ -3,9 +3,6 @@
 ### Installation
 `pip install ptir`
 
-### Dependencies
-- `opencv-python`
-
 ### Usage
 ```python
 import ptir
@@ -28,3 +25,6 @@ ptir.view24bitPalette()
   - `height` : The height of the output (will be 2 * `height` characters tall)
   - `interp_method` : Rescale interpolation method (Either 'bilinear' or 'nearest_neighbour')
   - `c8bit` : If True the image will be rendered in 8-bit colour, if False the image will be rendered in 24-bit colour. Not all terminal windows support 24-bit colour (Visit [this website](https://gist.github.com/XVilka/8346728) for more information)
+
+### Dependencies
+- `opencv-python`
