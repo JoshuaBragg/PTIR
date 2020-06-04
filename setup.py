@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
 	long_description = fh.read()
 
 setuptools.setup(
-	name="ptir-wiizrdz",
-	version="0.0.1",
+	name="ptir",
+	version="1.0.1",
 	author="Joshua Bragg",
 	author_email="joshua.bragg@outlook.com",
 	description="Python Terminal Image Renderer",
@@ -13,10 +13,13 @@ setuptools.setup(
 	long_description_content_type="text/markdown",
 	url="https://github.com/JoshuaBragg/PTIR",
 	packages=setuptools.find_packages(),
+	license='MIT',
+	install_requires=[
+		'opencv-python'
+	],
 	classifiers=[
 		"Programming Language :: Python :: 3",
 		"License :: OSI Approved :: MIT License",
 		"Operating System :: OS Independent",
-	],
-	python_requires='>=3',
+	]
 )

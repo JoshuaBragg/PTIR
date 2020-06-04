@@ -1,1 +1,4 @@
 ptir/__pycache__
+build/
+dist/
+ptir.egg-info/

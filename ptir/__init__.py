@@ -5,7 +5,6 @@ is8Bit = False
 
 def _print_error(e):
 	print (u'\u001b[31mERROR: \u001b[33m' + str(e) + u'\u001b[0m')
-	exit()
 
 def _write_pixel(r, g=None, b=None):
 	if not g or not b:
@@ -23,11 +22,13 @@ def _write_pixel(r, g=None, b=None):
 def render(image_path, width=100, height=100, interp_method='bilinear', c8bit=False):
 	if (width <= 0 or height <= 0 or (width // 1 != width) or (height // 1 != height)):
 		_print_error('WIDTH and HEIGHT parameters must be positive integers')
+		return
 
 	pic = cv2.imread(image_path)
 	
 	if (pic is None):
 		_print_error(f'Could not find image at location {image_path}')
+		return
 	
 	pic = cv2.resize(pic, dsize=(width, height), interpolation=(cv2.INTER_NEAREST if interp_method == 'nearest_neighbour' else cv2.INTER_LINEAR))
 
