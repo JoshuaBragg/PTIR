@@ -1,25 +1,21 @@
 import cv2
 import os
 
-is8Bit = False
-
 def _print_error(e):
 	print (u'\u001b[31mERROR: \u001b[33m' + str(e) + u'\u001b[0m')
 
-def _write_pixel(r, g=None, b=None):
-	if not g or not b:
-		b, g, r = list(map(lambda x: str(x), r))
-	else:
-		b, g, r = list(map(lambda x: str(x), [r, g, b]))
+def _write_pixel(bgr, is8Bit=False):
+	b, g, r = list(map(lambda x: str(x), bgr))
+	
 	if (is8Bit):
-		to8bit = lambda x: int(int(x) // 42.51)
-		r, g, b = to8bit(r), to8bit(g), to8bit(b)
+		to8Bit = lambda x: int(int(x) // 42.51)
+		r, g, b = to8Bit(r), to8Bit(g), to8Bit(b)
 		to8BitCode = lambda r, g, b: str(16 + 36 * r + 6 * g + b)
 		print (u'\u001b[48;5;' + to8BitCode(r, g, b) + 'm  ', end='')
 	else:
 		print (u'\x1b[48;2;' + r + ';' + g + ';' + b + 'm  ', end='')
 
-def render(image_path, width=100, height=100, interp_method='bilinear', c8bit=False):
+def render(image_path, width=100, height=100, interp_method='bilinear', is8Bit=False):
 	if (width <= 0 or height <= 0 or (width // 1 != width) or (height // 1 != height)):
 		_print_error('WIDTH and HEIGHT parameters must be positive integers')
 		return
@@ -32,11 +28,9 @@ def render(image_path, width=100, height=100, interp_method='bilinear', c8bit=Fa
 	
 	pic = cv2.resize(pic, dsize=(width, height), interpolation=(cv2.INTER_NEAREST if interp_method == 'nearest_neighbour' else cv2.INTER_LINEAR))
 
-	is8Bit = c8bit
-
 	for row in range(pic.shape[0]):
 		for col in range(pic.shape[1]):
-			_write_pixel(pic[row][col])
+			_write_pixel(pic[row][col], is8Bit)
 		print (u'\u001b[0m')
 
 def view8BitPalette():
@@ -49,7 +43,7 @@ def view8BitPalette():
 			print (u'\u001b[48;5;' + code + 'm  ', end='')
 	print (u'\u001b[0m')
 
-def view24bitPalette(*, ARE=False, YOU=False, SURE=False):
+def view24BitPalette(*, ARE=False, YOU=False, SURE=False):
 	if ARE and YOU and SURE:
 		for r in range(255):
 			for g in range(255):
