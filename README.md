@@ -1,4 +1,4 @@
-# P-TIR (Python Terminal Image Renderer)
+# PTIR (Python Terminal Image Renderer)
 
 ### Installation
 `pip install ptir`
