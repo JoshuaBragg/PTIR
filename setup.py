@@ -1,17 +1,17 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open('README.md', 'r') as fh:
 	long_description = fh.read()
 
 setuptools.setup(
-	name="ptir",
-	version="1.1.1",
-	author="Joshua Bragg",
-	author_email="joshua.bragg@outlook.com",
-	description="Python Terminal Image Renderer",
+	name='ptir',
+	version='1.1.2',
+	author='Joshua Bragg',
+	author_email='joshua.bragg@outlook.com',
+	description='Python Terminal Image Renderer',
 	long_description=long_description,
-	long_description_content_type="text/markdown",
-	url="https://github.com/JoshuaBragg/PTIR",
+	long_description_content_type='text/markdown',
+	url='https://github.com/JoshuaBragg/PTIR',
 	packages=setuptools.find_packages(),
 	license='MIT',
 	install_requires=[
@@ -19,8 +19,8 @@ setuptools.setup(
 		'Pillow'
 	],
 	classifiers=[
-		"Programming Language :: Python :: 3",
-		"License :: OSI Approved :: MIT License",
-		"Operating System :: OS Independent",
+		'Programming Language :: Python :: 3',
+		'License :: OSI Approved :: MIT License',
+		'Operating System :: OS Independent',
 	]
 )
