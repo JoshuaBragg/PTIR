@@ -5,20 +5,13 @@ import os
 def _print_error(e):
 	print (u'\u001b[31mERROR: \u001b[33m' + str(e) + u'\u001b[0m')
 
-def _write_pixel(rgb, is8Bit=False):
-	r, g, b = list(map(lambda x: str(x), rgb))
-	
-	if (is8Bit):
-		to8Bit = lambda x: int(int(x) // 42.51)
-		r, g, b = to8Bit(r), to8Bit(g), to8Bit(b)
-		to8BitCode = lambda r, g, b: str(16 + 36 * r + 6 * g + b)
-		print (u'\u001b[48;5;' + to8BitCode(r, g, b) + 'm  ', end='')
-	else:
-		print (u'\x1b[48;2;' + r + ';' + g + ';' + b + 'm  ', end='')
-
-def render(image_path, width=100, height=100, interp_method='bilinear', is8Bit=False):
+def render(image_path, width=100, height=100, interp_method='bilinear', only8Bit=False, only24Bit=False):
 	if (width <= 0 or height <= 0 or (width // 1 != width) or (height // 1 != height)):
 		_print_error('WIDTH and HEIGHT parameters must be positive integers')
+		return
+
+	if (only8Bit and only24Bit):
+		_print_error('Cannot have both only8Bit and only24Bit parameters true. They are mutually exclusive modes')
 		return
 
 	pic = Image.open(image_path)
@@ -28,10 +21,25 @@ def render(image_path, width=100, height=100, interp_method='bilinear', is8Bit=F
 		return
 	
 	pic = np.array(pic.resize((width, height), resample=(Image.NEAREST if interp_method == 'nearest_neighbour' else Image.BILINEAR)))
+	
+	to8Bit = lambda x: int(int(x) // 42.51)
+	to8BitCode = lambda r, g, b: str(16 + 36 * to8Bit(r) + 6 * to8Bit(g) + to8Bit(b))
+
+	def _write_pixel(rgb):
+		r, g, b = list(map(lambda x: str(x), rgb))
+
+		if (only8Bit):
+			print (u'\u001b[48;5;' + to8BitCode(r, g, b) + 'm  ', end='')
+		elif (only24Bit):
+			print (u'\x1b[48;2;' + r + ';' + g + ';' + b + u'm  ', end='')
+		else:
+			# 8-bit background and 24-bit foreground
+			print (u'\u001b[48;5;' + to8BitCode(r, g, b) + 'm', end='')
+			print (u'\x1b[38;2;' + r + ';' + g + ';' + b + u'm\u2588\u2588', end='')
 
 	for row in range(pic.shape[0]):
 		for col in range(pic.shape[1]):
-			_write_pixel(pic[row][col][:3], is8Bit)
+			_write_pixel(pic[row][col][:3])
 		print (u'\u001b[0m')
 
 def view8BitPalette():

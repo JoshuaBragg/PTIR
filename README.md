@@ -19,12 +19,16 @@ ptir.view8BitPalette()
 ptir.view24BitPalette()
 ```
 ### Documentation
-- `ptir.render(image_path, width=100, height=100, interp_method='bilinear', is8Bit=False)`
+- `ptir.render(image_path, width=100, height=100, interp_method='bilinear', only8Bit=False, only24Bit=False)`
   - `image_path` : Path to the image that will be rendered
   - `width` : The width of the output (will be 2 * `width` characters wide)
-  - `height` : The height of the output (will be 2 * `height` characters tall)
+  - `height` : The height of the output (will be `height` characters tall)
   - `interp_method` : Rescale interpolation method (Either 'bilinear' or 'nearest_neighbour')
-  - `is8Bit` : If True the image will be rendered in 8-bit colour, if False the image will be rendered in 24-bit colour. Not all terminal windows support 24-bit colour (Visit [this website](https://gist.github.com/XVilka/8346728) for more information)
+  - `only8Bit` : If True the image will be rendered without any 24-bit colour 
+  - `only24Bit` : If True the image will be rendered without any 8-bit colour. This mode is recommended to be used only if you are confident that the terminal will support 24-bit colour but are unsure if unicode characters are supported by the terminal font
+- Not all terminal windows support 24-bit colour (Visit [this website](https://gist.github.com/XVilka/8346728) for more information on TrueColour support)
+- **The macOS default Terminal.app DOES NOT support 24-bit colour!**
+- By default the image will be rendered with two layers, 24-bit foreground to display properly on supporting terminals, and a 8-bit background to display if 24-bit colour is not available
   
 ### Example #1
 **Original**:
