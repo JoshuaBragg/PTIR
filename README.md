@@ -33,28 +33,28 @@ ptir.view24BitPalette()
 ### Example #1
 **Original**:
 
-![mountain original](https://joshbra.gg/mountain.jpeg)
+![mountain original](https://braggbucket.ml/mountain.jpeg)
 
 **24-bit**:
 
-![mountain 24-bit](https://joshbra.gg/mountain24.png)
+![mountain 24-bit](https://braggbucket.ml/mountain24.png)
 
 **8-bit**:
 
-![mountain 8-bit](https://joshbra.gg/mountain8.png)
+![mountain 8-bit](https://braggbucket.ml/mountain8.png)
 
 ### Example #2
 **Original**:
 
-![mario original](https://joshbra.gg/mario.jpg)
+![mario original](https://braggbucket.ml/mario.jpg)
 
 **24-bit**:
 
-![mario 24-bit](https://joshbra.gg/mario24.png)
+![mario 24-bit](https://braggbucket.ml/mario24.png)
 
 **8-bit**:
 
-![mario 8-bit](https://joshbra.gg/mario8.png)
+![mario 8-bit](https://braggbucket.ml/mario8.png)
 
 ### Dependencies
 - `pillow`
