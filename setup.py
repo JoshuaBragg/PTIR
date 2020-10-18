@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
 	name='ptir',
-	version='1.2.0',
+	version='1.2.1',
 	author='Joshua Bragg',
 	author_email='joshua.bragg@outlook.com',
 	description='Python Terminal Image Renderer',
